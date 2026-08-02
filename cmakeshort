@@ -1,0 +1,18 @@
+#!/bin/bash -l
+set -euo pipefail
+
+uenv run --view=modules prgenv-gnu -- bash -lc '
+  module load boost cmake cray-mpich fftw gcc gsl hdf5 python cuda
+
+  cd ~/pkdgrav3
+  cd build
+
+  python -m venv ../.venv
+  source ../.venv/bin/activate
+
+  python -m pip install -r ../requirements.txt
+
+  make -j 40
+'
+sbatch /users/binliu/sod_tube/sod_16000_2.sh
+squeue -u binliu
