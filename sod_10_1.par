@@ -1,0 +1,91 @@
+import math
+
+achOutName	= "sod_10_kwh"
+
+# Memory and performance
+bMemUnordered	= 0	# iOrder replaced by potential and group id
+bNewKDK         = 1	# No accelerations in the particle, dual tree possible
+bDualTree	    = 0	# Use two trees
+bStandard       = 0
+bMemSoft        = 1 # include the softening in the particles 
+
+# Initial Condition
+dBoxSize        = 1000       # Mpc/h
+# nGrid           = 128        # Simulation has nGrid^3 particles
+# b2LPT           = 1          # second order IC
+bWriteIC        = 1          # Write ICs to file
+iSeed           = 314159265  # Random seed
+
+dPeriod       = [1.0, 0.5/128*16, 0.5/128*16]
+
+achInFile       = "./initial/sod_10_ic_grid_isentrope_relaxed1600_combined.tipsy"
+achOutPath      = "./results/" + achOutName + "/{name}.{step:05d}{type}"
+iStartStep	    = 0
+nSteps		    = 100
+# dRedTo		    = -0.4
+dDelta          = 0.01 # 0.1 # 0.01
+# dVelocityDamper = 0.99
+
+# Logging/Output
+iLogInterval    = 1
+iOutInterval	= 25
+#iCheckInterval	= 10
+bDoDensity	    = 0
+bVDetails	    = 1
+dHubble0        = math.sqrt(math.pi*8/3)
+
+bOverwrite	    = 1
+bParaRead       = 1	# Read in parallel
+bParaWrite      = 0	# Write in parallel (does not work on all file systems)
+#nParaRead	    = 8	# Limit number of simultaneous readers to this
+#nParaWrite	    = 8	# Limit number of simultaneous writers to this
+
+# Cosmological Simulation
+bComove         = 0     # Use comoving coordinates
+bPeriodic       = 1     # with a periodic box
+bEwald 		    = 0     # enable Ewald periodic boundaries
+bDoGravity	    = 0
+
+# Accuracy Parameters
+bEpsAccStep	    = 1     # Choose eps/a timestep criteria
+# dTheta  	    = 0.40	# accuracy of forces for z > 20
+# dTheta20  	  = 0.55	# accuracy of forces for z > 2
+# dTheta2         = 0.70	# accuracy of forces for z <= 2
+dTheta          = 0.7
+
+# parameters for hydrodynamic solvers
+# hydro_model: 0=NONE, 1=SPH, 2=MFM, 3=MFV
+hydro_model     = 1
+bMeshlessHydro  = 0     # legacy meshless switch (kept for compatibility)
+
+# cooling parameters 
+cooling_model 	= 1     # 0: no cooling, 1: KWH cooling, 2: KWH cooling with heating, 3: Grackle (tabulated), 4: Grackle (solve chemistry)
+dCoolingTimestepFactor = 0.1
+
+dConstGamma     = 1.4
+bMemBall = 1
+bGasIsentropic = 0
+dFastGasFraction = 0.01
+nSmooth = 32
+# iKernelType = 3
+dBallSizeLimit = 1.0
+
+# dKpcUnit = 2.06701e-13
+# dMsolUnit = 4.80438e-08
+# dKpcUnit = 1e-3
+# dMsolUnit = 6.76e6
+dKpcUnit = 2e-2
+dMsolUnit = 1.96e4 #* 64
+# dMeanMolWeight  = 1
+
+dConstAlpha = 1.5
+dConstBeta = 3
+dEtaCourant = 0.4
+dSoft = 0.02 / 128 # 0.02 * 64**(-3) # 0.0102
+
+bGasBuiltinIdeal = 1
+bGasOnTheFlyPrediction = 0
+bGasInterfaceCorrection = 0
+bGasConsistentPrediction = 1
+
+del math
