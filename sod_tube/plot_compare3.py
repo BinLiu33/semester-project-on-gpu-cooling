@@ -10,7 +10,7 @@ import sod
 
 RUN_SUFFIXES = ("nocool", "kwh", "kwheat")
 
-# 固定配色，與 sod_16000_compare5_*.gif 一致
+
 RUN_COLORS = {
     "nocool": "#1f77b4",    # blue
     "kwh": "#d62728",       # red
